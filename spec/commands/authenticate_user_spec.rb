@@ -12,9 +12,11 @@ RSpec.describe AuthenticateUser, type: [:command] do
     end
 
     context 'when user is enter invalid' do
+      let(:command) { AuthenticateUser.new("user", "password").call }
+
       it 'returns false' do
         expect(
-          AuthenticateUser.new("user", "password").call.errors
+          command.errors
         ).not_to be_empty
       end
     end

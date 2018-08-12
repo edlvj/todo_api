@@ -6,6 +6,7 @@ class AuthorizeApiRequest
   end
 
   def call
+    return unless http_auth_header
     user
   end
 

@@ -1,11 +1,13 @@
 class TaskPolicy < ApplicationPolicy
-  def create?
-    true
+  %w(create? update? destroy?).each do |action|
+    define_method action do
+      user_project?
+    end
   end
 
-  class Scope < Scope
-    def resolve
-      scope.join(:project).where('projects.user_id': user.id)
-    end
+  private
+
+  def user_project?
+    user.projects.include? record.project
   end
 end

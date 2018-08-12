@@ -16,9 +16,7 @@ class AuthenticateUser
   def user
     user = User.find_by_username(username)
     return user if user && user.authenticate(password)
-    p "mimo"
 
     errors.add :user_authentication, 'Invalid credentials'
-    nil
   end
 end

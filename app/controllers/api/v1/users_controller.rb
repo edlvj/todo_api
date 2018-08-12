@@ -6,7 +6,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def sign_up
-    @user = User.new(user_params)
+    @user = User.build(user_params)
     if @user.save
       response = { message: 'User created successfully'}
       render json: response, status: :created

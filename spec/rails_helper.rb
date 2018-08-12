@@ -8,6 +8,7 @@ require 'rspec/rails'
 require 'pundit/rspec'
 require 'database_cleaner'
 require 'simplecov'
+require 'shared_context'
 
 
 begin
@@ -47,7 +48,7 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 
-
+  config.include_context 'api', type: :controller
   config.use_transactional_fixtures = true
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!

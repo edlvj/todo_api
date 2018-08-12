@@ -9,6 +9,7 @@ module ExceptionHandler
 
   included do
     rescue_from ActiveRecord::RecordInvalid, with: :unprocessable_entity
+    rescue_from Pundit::NotAuthorizedError, with: :forbidden
     rescue_from ExceptionHandler::AuthenticationError, with: :unauthorized_request
     rescue_from ExceptionHandler::MissingToken, with: :unprocessable_entity
     rescue_from ExceptionHandler::InvalidToken, with: :unprocessable_entity
@@ -25,6 +26,10 @@ module ExceptionHandler
   end
 
   private
+
+  def forbidden
+    render json: { message: "Not allowed." }, status: :forbidden
+  end
 
   def unprocessable_entity(e)
     render json: { message: e.message }, status: :unprocessable_entity

@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :task do
-    title { FFaker::CoursesFR::Mathematiques.lesson }
+    title { FFaker::Skill.tech_skill }
     priority 1
     project
   end

@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
+  include Pundit
   include ExceptionHandler
-  rescue_from ::Pundit::NotAuthorizedError, with: :forbidden
 
   before_action :authenticate_request
   attr_reader :current_user
@@ -8,7 +8,12 @@ class ApplicationController < ActionController::API
   private
 
   def authenticate_request
-    @current_user = AuthorizeApiRequest.call(request.headers).result
-    render json: { error: 'Not Authorized' }, status: 401 unless @current_user
+    command = AuthorizeApiRequest.call(request.headers)
+
+    if command.success?
+      @current_user = command.result
+    else
+      render json: { error: command.errors }, status: :unauthorized
+    end
   end
 end

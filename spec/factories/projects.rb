@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :project do
-    title { FFaker::CoursesFR::Mathematiques.lesson }
+    title { FFaker::Skill.specialty }
     user
   end
 

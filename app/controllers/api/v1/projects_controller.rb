@@ -1,36 +1,39 @@
 class Api::V1::ProjectsController < ApplicationController
-  before_action :set_project, only: [:update, :destroy]
+  before_action :set_project, only: %w(update destroy)
 
   def index
     @projects = policy_scope(Project)
-    render jsonapi: @projects
+    render json: ProjectSerializer.new(@projects, include: [:tasks]).serialized_json
   end
 
   def create
-    @project.new(project_params)
+    @project = Project.build(project_params)
+    @project.user = current_user
 
     if @project.save
-      render json: @project
+      render json: ProjectSerializer.new(@project, include: [:tasks]).serialized_json
     else
-      render json: { error: @project.errors.full_messages }, status: :unprocessable_entity
+      render json: { errors: @project.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
   def update
     authorize @project, :update?
+
     if @project.update_attributes(project_params)
-      render json: @project
+      render json: ProjectSerializer.new(@project, include: [:tasks]).serialized_json
     else
-      render json: { error: @project.errors.full_messages }, status: :unprocessable_entity
+      render json: { errors: @project.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
   def destroy
     authorize @project, :destroy?
+
     if @project.destroy
-      render json: @project
+      render json: ProjectSerializer.new(@project, include: [:tasks]).serialized_json
     else
-      render json: { error: @project.errors.full_messages }, status: :unprocessable_entity
+      render json: { errors: @project.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -41,6 +44,6 @@ class Api::V1::ProjectsController < ApplicationController
   end
 
   def set_project
-    @project = Project.find(params[:project_id])
+    @project = Project.find(params[:id])
   end
 end
