@@ -7,7 +7,7 @@ class Api::V1::ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.build(project_params)
+    @project = Project.new(project_params)
     @project.user = current_user
 
     if @project.save

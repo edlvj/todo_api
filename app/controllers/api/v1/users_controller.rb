@@ -6,7 +6,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def sign_up
-    @user = User.build(user_params)
+    @user = User.new(user_params)
     if @user.save
       response = { message: 'User created successfully'}
       render json: response, status: :created
@@ -18,7 +18,7 @@ class Api::V1::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:username, :password)
+    params.permit(:username, :password)
   end
 
   def authenticate(params)
@@ -26,7 +26,7 @@ class Api::V1::UsersController < ApplicationController
 
     if command.success?
       render json: {
-          access_token: command.result,
+          token: command.result,
           message: 'Login Successful'
       }
     else
