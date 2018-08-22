@@ -3,7 +3,7 @@ class Api::V1::TasksController < ApplicationController
 
   def create
     @project = Project.find(params[:project_id])
-    @task = @project.tasks.build(task_params)
+    @task = @project.tasks.new(task_params)
 
     authorize @task, :create?
 

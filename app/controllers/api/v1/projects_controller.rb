@@ -44,6 +44,6 @@ class Api::V1::ProjectsController < ApplicationController
   end
 
   def set_project
-    @project = Project.find(params[:id])
+    @project = Project.include(:tasks).find(params[:id])
   end
 end
