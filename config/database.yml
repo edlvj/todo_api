@@ -15,7 +15,7 @@ development:
   host: localhost
   database: todo_api_development
   username: postgres
-  password: helsetjenester
+  password: 123
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -24,7 +24,7 @@ test:
   <<: *default
   database: todo_api_test
   username: postgres
-  password: helsetjenester
+  password: 123
 
 production:
   <<: *default
