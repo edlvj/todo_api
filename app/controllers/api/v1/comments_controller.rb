@@ -1,6 +1,11 @@
 class Api::V1::CommentsController < ApplicationController
   before_action :set_comment, only: :destroy
 
+  def index
+    @comments = policy_scope(Comment).where("tasks.id": params[:task_id]).where("projects.id": params[:project_id])
+    render json: CommentSerializer.new(@comments).serialized_json
+  end
+
   def create
     @project = Project.find(params[:project_id])
     @task = @project.tasks.find(params[:task_id])

@@ -25,7 +25,6 @@ RSpec.describe Api::V1::CommentsController, type: :controller do
 
       it 'return status 200' do
         delete :destroy, params: { id: comment.id, project_id: project.id, task_id: task.id }
-        p response.body
         expect(response).to be_success
       end
 
