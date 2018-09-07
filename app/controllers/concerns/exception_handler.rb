@@ -36,7 +36,6 @@ module ExceptionHandler
   end
 
   def invalid_token(e)
-    p "hello"
     render json: { message: e.message }, status: :unauthorized
   end
 

@@ -39,8 +39,6 @@ class Api::V1::TasksController < ApplicationController
   def change_priority
     return true unless params[:task][:move_type]
 
-    p params[:task][:move_type]
-
     case params[:task][:move_type].to_sym
     when :up
       @task.increment_position

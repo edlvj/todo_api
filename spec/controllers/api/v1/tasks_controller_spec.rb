@@ -11,7 +11,7 @@ RSpec.describe Api::V1::TasksController, type: :controller do
 
       it 'return status 200' do
         post :create, params: valid_params
-        expect(response).to be_success
+        expect(response).to have_http_status(:success)
       end
     end
   end
@@ -24,7 +24,7 @@ RSpec.describe Api::V1::TasksController, type: :controller do
 
       it 'returns a successful 200 response' do
         put :update, params: valid_params
-        expect(response).to be_success
+        expect(response).to have_http_status(:success)
       end
 
       it 'update project' do
@@ -41,7 +41,7 @@ RSpec.describe Api::V1::TasksController, type: :controller do
 
       it 'return status 200' do
         delete :destroy, params: { project_id: project.id, id: task.id }
-        expect(response).to be_success
+        expect(response).to have_http_status(:success)
       end
 
       it 'destroy task' do
@@ -57,7 +57,7 @@ RSpec.describe Api::V1::TasksController, type: :controller do
 
       it 'return status forbidden' do
         delete :destroy, params: { project_id: project.id, id: task.id }
-        expect(response).to be_forbidden
+        expect(response).to have_http_status(:forbidden)
       end
     end
   end

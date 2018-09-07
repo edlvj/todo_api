@@ -7,7 +7,6 @@ class Api::V1::CommentsController < ApplicationController
   end
 
   def create
-    p params.inspect
     @project = Project.find(params[:project_id])
     @task = @project.tasks.find(params[:task_id])
     @comment = @task.comments.new(comment_params)

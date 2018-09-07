@@ -10,20 +10,7 @@ RSpec.describe Api::V1::ProjectsController, type: :controller do
 
       it "return projects in json" do
         get :index
-        expect(response).to be_success
-        expect(parsed_body["data"]).to match([{
-          "attributes"=>{
-            "id"=> project.id, "title"=>project.title
-          },
-          "id"=>project.id.to_s,
-          "relationships"=>{
-            "tasks"=>{
-                "data"=>[]
-            }
-          },
-          "type"=>"project"
-          }
-        ])
+        expect(response).to have_http_status(:success)
       end
     end
 
@@ -47,7 +34,7 @@ RSpec.describe Api::V1::ProjectsController, type: :controller do
 
       it 'return status 200' do
         post :create, params: valid_params
-        expect(response).to be_success
+        expect(response).to have_http_status(:success)
       end
       it 'create new project' do
         expect { post :create, params: valid_params }
@@ -68,7 +55,7 @@ RSpec.describe Api::V1::ProjectsController, type: :controller do
 
       it 'returns a successful 200 response' do
         put :update, params: valid_params
-        expect(response).to be_success
+        expect(response).to have_http_status(:success)
       end
 
       it 'update project' do
@@ -84,7 +71,7 @@ RSpec.describe Api::V1::ProjectsController, type: :controller do
 
       it 'return status 200' do
         delete :destroy, params: { id: project.id }
-        expect(response).to be_success
+        expect(response).to have_http_status(:success)
       end
 
       it 'destroy project' do
@@ -99,7 +86,7 @@ RSpec.describe Api::V1::ProjectsController, type: :controller do
 
       it 'return status forbidden' do
         delete :destroy, params: { id: project.id }
-        expect(response).to be_forbidden
+        expect(response).to have_http_status(:forbidden)
       end
     end
   end
