@@ -19,6 +19,7 @@ set :repository, 'git@github.com:edlvj/todo_api.git'
 
 set :shared_paths, [
   'config/database.yml',
+  'config/secrets.yml',
   'public/uploads',
   'tmp/pids',
   'tmp/sockets',
