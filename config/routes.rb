@@ -11,4 +11,6 @@ Rails.application.routes.draw do
       post 'users/sign_up'
     end
   end
+
+  mount API::Base => '/'
 end

@@ -7,11 +7,11 @@ require 'mina/puma'
 set :application_name, 'Todo List'
 
 set :domain, '52.59.66.253'
-set :deploy_to, '/home/ubuntu/projects/todo_api'
+set :deploy_to, '/home/ubuntu/projects/todo_list_api'
 set :branch, 'dev'
 set :user, 'ubuntu'
 set :rails_env, 'production'
-set :repository, 'git@github.com:edlvj/todo_api.git'
+set :repository, 'git@github.com:edlvj/todo_list_api.git'
 #set :forward_agent, true
 #set :term_mode, nil
 
@@ -27,7 +27,7 @@ set :shared_paths, [
 ]
 
 task :environment do
-  invoke :'rvm:use[ruby-2.4.2@todo_api]'
+  invoke :'rvm:use[ruby-2.4.2@todo_list_api]'
 end
 
 task :setup => :environment do

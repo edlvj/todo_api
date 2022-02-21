@@ -8,8 +8,8 @@ development:
   <<: *default
   host: localhost
   database: todo_api_development
-  username: postgres
-  password: 123
+  username: todo_api
+  password: todo_api
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -17,8 +17,8 @@ development:
 test:
   <<: *default
   database: todo_api_test
-  username: postgres
-  password: 123
+  username: todo_api
+  password: todo_api
 
 production:
   <<: *default

@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+
 class Api::V1::TasksController < ApplicationController
   before_action :set_task, only: %w(update destroy)
 

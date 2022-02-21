@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Api::V1::ProjectsController, type: :controller do
   before do
     request.headers.merge!(auth_header)

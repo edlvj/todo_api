@@ -13,14 +13,24 @@ require "action_cable/engine"
 # require "sprockets/railtie"
 require "rails/test_unit/railtie"
 
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
+
+Dir[File.join(File.dirname(__FILE__), '..', 'app', 'api', 'v2', 'entities', '*.rb')].each { |f| require f }
+Dir[File.join(File.dirname(__FILE__), '..', 'app', 'api', 'v2', 'endpoints', '*.rb')].each { |f| require f }
+Dir[File.join(File.dirname(__FILE__), '..', 'app', 'api', 'v1', '**', '*.rb')].each { |f| require f }
+Dir[File.join(File.dirname(__FILE__), '..', 'app', 'api', 'v2', '**', '*.rb')].each { |f| require f }
+Dir[File.join(File.dirname(__FILE__), '..', 'app', 'api', '*.rb')].each { |f| require f }
 
 module TodoApi
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
+
+    config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
+    config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]
 
     config.middleware.insert_before 0, Rack::Cors do
       allow do
