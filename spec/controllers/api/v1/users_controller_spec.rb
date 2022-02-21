@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Api::V1::UsersController, type: :controller do
 
   describe "POST #sign_in" do

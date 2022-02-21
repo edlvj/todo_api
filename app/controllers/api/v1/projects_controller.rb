@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::V1::ProjectsController < ApplicationController
   before_action :set_project, only: %w(update destroy)
 

@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.4.2'
 
+
 gem 'fast_jsonapi'
 gem 'rails', '~> 5.2.0'
 gem 'pg'
@@ -15,6 +16,9 @@ gem 'simple_command'
 gem 'pundit'
 gem 'acts_as_list'
 gem 'aws-sdk-s3', require: false
+
+gem 'grape'
+gem 'grape-entity'
 
 group :development, :test do
   gem 'mina', '0.3.0'
